@@ -1,0 +1,40 @@
+.sign-in {
+    font-weight: 700;
+    font-family: 'Open Sans';
+    font-size: 300%;
+    color: #575a5b;
+}
+
+.discription {
+    font-weight: 300;
+    line-height: 1.5;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 70%;
+}
+
+.input-value {
+    border-radius: 3px;
+    border: 1px solid #aebdc1;
+    padding: 0.625em;
+    width: 70%;
+}
+
+.sign-in-button {
+    display: inline-block;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #21abc7;
+    border: 1px solid #21abc7;
+    color: #ffffff;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: 0.2s;
+    width: 70%;
+    height: 50px;
+    margin-top: 50px;
+}
+
+.forget-password {
+    margin-top: 20px;
+}
