@@ -10,6 +10,7 @@
 2.	Software dependencies
     - .NET Core 1.1
     - Web API 2.0
+    - Angular 2
 
 3.	Latest releases
 
