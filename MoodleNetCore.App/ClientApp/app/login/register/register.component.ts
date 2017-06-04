@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
-import { LoginModel, FormStatus } from "./../core/login.interface";
+import { RegisterModel, FormStatus } from "./../core/login.interface";
+import { LoginService } from "../core/login.service";
 
 @Component({
     selector: 'register',
@@ -13,9 +14,12 @@ export class RegisterComponent implements OnInit {
     registerForm: FormGroup;
     showPassword: boolean;
     agreeTermOfUse: boolean;
-    loginModel = <LoginModel>{};
+    registerModel = <RegisterModel>{};
 
-    constructor(private fb: FormBuilder, private router: Router) { }
+    constructor(
+        private fb: FormBuilder,
+        private router: Router,
+        private loginService: LoginService) { }
 
     ngOnInit(): void {
         this.buildForm();
@@ -23,9 +27,9 @@ export class RegisterComponent implements OnInit {
 
     buildForm(): void {
         this.registerForm = this.fb.group({
-            'email': [this.loginModel.email, [Validators.required]],
-            'username': [this.loginModel.username, [Validators.required, Validators.maxLength(100)]],
-            'password': [this.loginModel.password, [Validators.required, Validators.minLength(6), Validators.maxLength(128)]],
+            'email': [this.registerModel.email, [Validators.required]],
+            'username': [this.registerModel.username, [Validators.required, Validators.maxLength(100)]],
+            'password': [this.registerModel.password, [Validators.required, Validators.minLength(6), Validators.maxLength(128)]],
             'agreeTermOfUse': [this.agreeTermOfUse, [Validators.required]]
         });
         this.registerForm.valueChanges
@@ -51,9 +55,18 @@ export class RegisterComponent implements OnInit {
 
     onSubmit() {
         if (this.registerForm.status === FormStatus.valid && this.registerForm.dirty) {
-            this.loginModel = this.registerForm.value;
-            this.router.navigate(['/home']);
-            return;
+            this.registerModel = {
+                email: this.registerForm.get("email").value,
+                username: this.registerForm.get("username").value,
+                password: this.registerForm.get("password").value
+            };
+            
+            this.loginService.register(this.registerModel)
+                .then((res) => { 
+                    console.log('registered');
+                    // this.router.navigate(['/home']);
+                 })
+                .catch(err => console.log(err));
         }
         this.validate();
     }
@@ -74,10 +87,10 @@ export class RegisterComponent implements OnInit {
         }
     }
 
-    goToLogin(){
+    goToLogin() {
         this.router.navigate(['/login/sign_in']);
     }
-    
+
     formErrors = {
         'email': '',
         'username': '',

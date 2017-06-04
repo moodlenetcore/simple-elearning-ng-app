@@ -10,3 +10,9 @@ export const FormStatus = {
     pending: 'PENDING',
     disabled: 'DISABLED',
 }
+
+export interface RegisterModel {
+    email: string;
+    username: string;
+    password: string;
+}
