@@ -1,31 +1,28 @@
-# Introduction
-- This source code belongs to MoodleNetCore project, built by NashTech Team.
-- MoodleNetCore project is a research project for Nasher to practice and have a chance to work on new technology, such as Microservice infrastructure, Angular and .NET Core.
+# MoodleApp
 
-# Getting Started
-1.	Installation process
-    - Visual Studio 2017 with .NET Core feature turned on.
-    - SQL Server 2014 and up.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.3.
 
-2.	Software dependencies
-    - .NET Core 1.1
-    - Web API 2.0
-    - Angular 2
+## Development server
 
-3.	Latest releases
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-4.	API references
+## Code scaffolding
 
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|module`.
 
-# Build and Test
-- Get latest code from github.
-- open Power Shell with Administrators
-- cd to [Your mapped local folder]\MoodleNetCore.App
-- run "dotnet restore"
-- run "npm install"
-- run "npm install -g webpack"
-- run "webpack --config webpack.config.vendor.js"
-- Open solution MoodleNetCore.sln with VS2017
-- Build source code
-- Start app with IIS or IISExpress
+## Build
 
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+
+## Running unit tests
+
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+## Running end-to-end tests
+
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Before running the tests make sure you are serving the app via `ng serve`.
+
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
