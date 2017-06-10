@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
+import { HttpService } from "../../common/services/http.service";
 
 @Component({
     selector: 'profile-home',
@@ -9,8 +9,12 @@ import { Router } from "@angular/router";
 
 export class ProfileHomeComponent implements OnInit {
 
-    constructor() { }
+    constructor(private http: HttpService) { }
 
-    ngOnInit(): void {
+    ngOnInit() {
+    }
+
+    logout() {
+        this.http.logout();
     }
 }

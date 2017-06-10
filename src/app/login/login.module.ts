@@ -1,25 +1,33 @@
 import { NgModule } from "@angular/core";
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from "@angular/common";
 
+import { AppCommonModule } from "../common/common.module";
 import { LoginRoutingModule } from "./login-routing.module";
 
 import { LoginComponent } from "./login.component";
 import { LoginHomeComponent } from "./home/home.component";
 import { RegisterComponent } from "./register/register.component";
-import { CommonModule } from "@angular/common";
+
+import { LoginService } from "./core/login.service";
+
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        LoginRoutingModule
+        LoginRoutingModule,
+        AppCommonModule
     ],
     declarations: [
         LoginComponent,
         LoginHomeComponent,
         RegisterComponent
+    ],
+    providers: [
+        LoginService
     ]
 })
 

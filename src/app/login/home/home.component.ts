@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { Router } from "@angular/router";
+import { HttpService } from "../../common/services/http.service";
 import { LoginModel } from "../core/login.interface";
+import { LoginService } from "../core/login.service";
 
 @Component({
     selector: 'login-home',
@@ -9,10 +10,24 @@ import { LoginModel } from "../core/login.interface";
 })
 
 export class LoginHomeComponent {
-model: LoginModel = <LoginModel>{};
-     constructor(private router: Router) { }
+    model: LoginModel = <LoginModel>{};
+
+    constructor(
+        private http: HttpService,
+        private loginService: LoginService) { }
 
     register() {
-        this.router.navigate(['/login/register']);
+        this.http.navigateTo(['/login/register']);
+    }
+
+    forgotPassword() {
+        this.http.navigateTo(['/login/forgotPassword']);
+    }
+
+    login() {
+        this.loginService.login(this.model)
+            .subscribe((res) => {
+                this.http.navigateTo(['/profile/home']);
+            });
     }
 }
