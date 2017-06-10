@@ -1,0 +1,11 @@
+<div class="sign-in">Log In</div>
+<div class="discription">Don't have a MoodleNetCore account? <a (click)="register()"><b>Create account</b></a></div>
+<div>
+    <div class="input-title">Email</div>
+    <input type="email" id="email" class="input-value" [(ngModel)]="model.email" />
+    <div class="input-title">Password</div>
+    <input type="password" id="password" class="input-value" [(ngModel)]="model.password" />
+</div>
+
+<div class="forget-password"><a (click)="forgotPassword()"><b>Forgot password?</b></a></div>
+<button class="sign-in-button" (click)="login()">Log in</button>

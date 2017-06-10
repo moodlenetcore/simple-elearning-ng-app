@@ -1,0 +1,11 @@
+import { Routes, RouterModule } from '@angular/router';
+import { ModuleWithProviders } from '@angular/core';
+
+export const routes: Routes = [
+    { path: '', redirectTo: 'login', pathMatch: 'full' },
+    { path: 'login', loadChildren: './login/login.module#LoginModule' },
+    { path: 'profile', loadChildren: './profile/profile.module#ProfileModule' },
+    { path: '**', redirectTo: 'login' }
+];
+
+export const routing: ModuleWithProviders = RouterModule.forRoot(routes, { useHash: true });
