@@ -17,4 +17,7 @@ export class ProfileComponent extends BaseAuthComponent implements OnInit {
     super.ngOnInit();
   }
 
+  scrollToTop() {
+
+  }
 }

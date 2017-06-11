@@ -1,2 +1,106 @@
-<div>Profile app</div>
-<button (click)=logout()>Log out</button>
+<!--<div>Profile app</div>
+<button (click)=logout()>Log out</button>-->
+<div class="about-me" id="about">
+    <h3 class="text-center slideanim">About My Skills</h3>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-xs-12">
+                <div class="mydetails slideanim text-center">
+                    <img class="img-circle img-responsive" [src]="userInfo.image" [alt]="userInfo.fullName" width="200" height="200">
+                    <h3>{{userInfo.fullName}}</h3>
+                    <p>{{userInfo.position}}</p>
+                    <div class="social-icons">
+                        <a href="#"><span class="facebook"></span></a>
+                        <a href="#"><span class="twitter"></span></a>
+                        <a href="#"><span class="linkedin"></span></a>
+                        <a href="#"><span class="googleplus"></span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 col-xs-12">
+                <div class="myskills slideanim">
+                    <h3 class="text-center">My Skill Info</h3>
+                    <p class="skill-text">Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer
+                        took a galley of type and scrambled it to make a type specimen book.</p>
+                    <div class="skill-info">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <h4>Photoshop</h4>
+                                        </td>
+                                        <td><span class="longline1"></span><span class="shortline1"></span></td>
+                                        <td>
+                                            <p>89%</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h4>Multimedia</h4>
+                                        </td>
+                                        <td><span class="longline2"></span><span class="shortline2"></span></td>
+                                        <td>
+                                            <p>90%</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h4>After-Effects</h4>
+                                        </td>
+                                        <td><span class="longline3"></span><span class="shortline3"></span></td>
+                                        <td>
+                                            <p>95%</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h4>Wordpress</h4>
+                                        </td>
+                                        <td><span class="longline4"></span><span class="shortline4"></span></td>
+                                        <td>
+                                            <p>92%</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h4>HTML5</h4>
+                                        </td>
+                                        <td><span class="longline5"></span><span class="shortline5"></span></td>
+                                        <td>
+                                            <p>96%</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="myportfolio" id="portfolio">
+    <h3 class="text-center slideanim">Your Courses</h3>
+    <p class="text-center slideanim">Your Recent Courses , Just "Click" on them to view more.</p>
+    <section class="vertical" id="grid3d">
+        <div class="grid-wrap">
+            <div class="grid">
+                <figure *ngFor="let course of myCourses">
+                    <img class="slideanim" [src]="course.image" [alt]="course.title" />
+                </figure>
+            </div>
+        </div>
+        <!-- /grid-wrap -->
+        <div class="content">
+            <div *ngFor="let course of myCourses">
+                <div class="content-img"><img [src]="course.image" class="img-responsive" alt="my projects"></div>
+                <h3 class="content-text">{{course.title}}</h3>
+                <p class="content-text">{{course.description}}</p>
+            </div>
+            <span class="loading"></span>
+            <span class="icon close-content"></span>
+        </div>
+    </section>
+</div>
