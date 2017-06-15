@@ -1,15 +1,10 @@
 <div class="sign-up">Create Free Account</div>
 <div class="discription">Already have a Code School account? <a (click)="goToLogin()"><b>Sign in</b></a></div>
-<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="registerForm">
     <div>
         <div class="input-title">Enter your email address</div>
         <input type="email" id="email" class="input-value" formControlName="email" required />
         <div *ngIf="formErrors.email" class="alert alert-danger">{{ formErrors.email }}</div>
-    </div>
-    <div>
-        <div class="input-title">Choose a username</div>
-        <input type="text" id="username" class="input-value" formControlName="username" required />
-        <div *ngIf="formErrors.username" class="alert alert-danger">{{ formErrors.username }}</div>
     </div>
     <div>
         <div class="input-title">Pick a password</div>

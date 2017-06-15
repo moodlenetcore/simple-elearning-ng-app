@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { RegisterModel, FormStatus } from "./../core/login.interface";
+import { LoginService } from "app/login/core/login.service";
+import { HttpService } from "app/common/services/http.service";
 
 @Component({
     selector: 'register',
@@ -14,8 +16,12 @@ export class RegisterComponent implements OnInit {
     showPassword: boolean;
     agreeTermOfUse: boolean;
     registerModel = <RegisterModel>{};
-
-    constructor(private fb: FormBuilder, private router: Router) { }
+    
+    constructor(
+        private fb: FormBuilder,
+        private router: Router,
+        private http: HttpService,
+        private loginService: LoginService) { }
 
     ngOnInit(): void {
         this.buildForm();
@@ -24,7 +30,6 @@ export class RegisterComponent implements OnInit {
     buildForm(): void {
         this.registerForm = this.fb.group({
             'email': [this.registerModel.email, [Validators.required]],
-            'username': [this.registerModel.username, [Validators.required, Validators.maxLength(100)]],
             'password': [this.registerModel.password, [Validators.required, Validators.minLength(6), Validators.maxLength(128)]],
             'agreeTermOfUse': [this.agreeTermOfUse, [Validators.required]]
         });
@@ -52,8 +57,13 @@ export class RegisterComponent implements OnInit {
     onSubmit() {
         if (this.registerForm.status === FormStatus.valid && this.registerForm.dirty) {
             this.registerModel = this.registerForm.value;
-            this.router.navigate(['/home']);
-            return;
+            this.loginService.register(<RegisterModel>{
+                email: this.registerForm.value.email,
+                password: this.registerForm.value.password,
+                confirmPassword: this.registerForm.value.password
+            }).subscribe((res) => {
+                this.http.navigateTo(['/profile/home']);
+            });;
         }
         this.validate();
     }
@@ -80,7 +90,6 @@ export class RegisterComponent implements OnInit {
     
     formErrors = {
         'email': '',
-        'username': '',
         'password': '',
         'agreeTermOfUse': ''
     };
@@ -89,12 +98,6 @@ export class RegisterComponent implements OnInit {
         'email': {
             'required': 'This field is required',
             'invalidEmail': 'Email is invalid'
-        },
-        'username': {
-            'required': 'This field is required',
-            'maxlength': 'Username is too long (maximum is 100 characters)',
-            'invalidName': 'Username cannot start with a number, and should only have letters & numbers without spaces.',
-            'alreadyExist': 'Username has already been taken'
         },
         'password': {
             'required': 'This field is required',
