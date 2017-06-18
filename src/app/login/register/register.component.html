@@ -1,25 +1,30 @@
-<div class="sign-up">Create Free Account</div>
-<div class="discription">Already have a Code School account? <a (click)="goToLogin()"><b>Sign in</b></a></div>
-<form [formGroup]="registerForm">
-    <div>
-        <div class="input-title">Enter your email address</div>
-        <input type="email" id="email" class="input-value" formControlName="email" required />
-        <div *ngIf="formErrors.email" class="alert alert-danger">{{ formErrors.email }}</div>
+<div class="register-title">Create Free Account</div>
+<div class="register-description">Already have a Code School account? <a (click)="goToLogin()"><b>Sign in</b></a></div>
+<form [formGroup]="registerForm" class="register-form">
+    
+    <div class="input-field">
+        <div class="input-label">Enter your email address</div>
+        <input type="email" id="email" class="input-value" [class.error]="formErrors.email" formControlName="email" required />
+        <div *ngIf="formErrors.email" class="input-error">{{ formErrors.email }}</div>
     </div>
-    <div>
-        <div class="input-title">Pick a password</div>
-        <input [type]="showPassword ? 'text': 'password'" id="password" class="input-value" formControlName="password" required />
-        <div *ngIf="formErrors.password" class="alert alert-danger">{{ formErrors.password }}</div>
+
+    <div class="input-field">
+        <div class="input-label">Pick a password</div>
+        <input [type]="passwordInputType" id="password" class="input-value" [class.error]="formErrors.password" formControlName="password" required />
+        <div *ngIf="formErrors.password" class="input-error">{{ formErrors.password }}</div>
+        <label class="checkbox-field">
+            <input class="checkbox-input" type="checkbox" [(ngModel)]="showPassword" [ngModelOptions]="{standalone: true}"/>
+            <span class="checkbox-label">Show password</span>
+        </label>
     </div>
-    <label>
-        <input class="show-password-toggle" type="checkbox" value="" [(ngModel)]="showPassword" [ngModelOptions]="{standalone: true}"/>
-        <span class="tcs tsxs">Show password</span>
-    </label>
-    <div>
-        <input class="show-password-toggle" type="checkbox" value="" formControlName="agreeTermOfUse" required />
-        <span class="tcs tsxs">By checking this box and continuing, I agree to the</span><a class="link link--underline" href="#">Terms of Use</a>
-        <div *ngIf="formErrors.agreeTermOfUse" class="alert alert-danger">{{ formErrors.agreeTermOfUse }}</div>
+    
+    <div class="term-of-use">
+        <label class="term-block checkbox-field" [class.error]="formErrors.agreeTermOfUse">
+            <input class="checkbox-input" type="checkbox" formControlName="agreeTermOfUse" required />
+            <span class="checkbox-label">By checking this box and continuing, I agree to the </span><a class="link link--underline" href="#">Terms of Use</a>
+        </label>        
+        <div *ngIf="formErrors.agreeTermOfUse" class="input-error">{{ formErrors.agreeTermOfUse }}</div>
     </div>
-    <div class="forget-password"><a><b>Forgot password?</b></a></div>
-    <button class="sign-up-button" (click)="onSubmit()">Create Free Account</button>
+    
+    <button class="register-button " (click)="onSubmit()">Create Free Account</button>
 </form>

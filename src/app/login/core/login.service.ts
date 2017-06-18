@@ -15,13 +15,16 @@ export class LoginService {
 			.map((res) => {
 				let result = res.json();
 				sessionStorage.setItem("token", result.accessToken);
-
 				return result;
 			});
 	};
 
 	register(model: RegisterModel) {
 		return this.http.post(`${baseApi}/Register`, model)
-			.map((res) => res);
+			.map((res) => {
+				let result = res.json();
+				sessionStorage.setItem("token", result.accessToken);
+				return result;
+			});
 	};
 }

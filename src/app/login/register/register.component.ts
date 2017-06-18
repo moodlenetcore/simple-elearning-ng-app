@@ -17,6 +17,10 @@ export class RegisterComponent implements OnInit {
     agreeTermOfUse: boolean;
     registerModel = <RegisterModel>{};
     
+    get passwordInputType(): string {
+        return this.showPassword ? 'text' : 'password';
+    }
+
     constructor(
         private fb: FormBuilder,
         private router: Router,
