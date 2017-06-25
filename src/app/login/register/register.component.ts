@@ -16,7 +16,8 @@ export class RegisterComponent implements OnInit {
     showPassword: boolean;
     agreeTermOfUse: boolean;
     registerModel = <RegisterModel>{};
-    
+    generalErrors: any = null;
+
     get passwordInputType(): string {
         return this.showPassword ? 'text' : 'password';
     }
@@ -44,6 +45,7 @@ export class RegisterComponent implements OnInit {
 
     onValueChanged(data?: any) {
         if (!this.registerForm) { return; }
+        this.generalErrors = null;
         const form = this.registerForm;
         for (const field in this.formErrors) {
             // clear previous error message (if any)
@@ -67,9 +69,26 @@ export class RegisterComponent implements OnInit {
                 confirmPassword: this.registerForm.value.password
             }).subscribe((res) => {
                 this.http.navigateTo(['/profile/home']);
-            });;
+            }, (err) => {
+                this.generalErrors = this.getParseServerErrorsToArray(err.json());
+            });
         }
         this.validate();
+    }
+
+    getParseServerErrorsToArray(serverErrors) {
+        let props = Object.getOwnPropertyNames(serverErrors);
+        if (props.length == 0) { return [serverErrors]; }
+
+        let result = [];
+        for (var index = 0; index < props.length; index++) {
+            var prop = serverErrors[props[index]];
+            for (var subIndex = 0; subIndex < prop.length; subIndex++) {
+                let sub = prop[subIndex];
+                result.push(sub);
+            }
+        }
+        return result;
     }
 
     validate() {
@@ -88,10 +107,10 @@ export class RegisterComponent implements OnInit {
         }
     }
 
-    goToLogin(){
+    goToLogin() {
         this.router.navigate(['/login/sign_in']);
     }
-    
+
     formErrors = {
         'email': '',
         'password': '',

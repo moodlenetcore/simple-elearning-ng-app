@@ -82,6 +82,6 @@ export class HttpService {
 
     private handleError(error: any) {
         console.error('An error occurred', error);
-        return new Observable(error);
+        return Observable.throw(error);
     }
 }
