@@ -53,8 +53,4 @@ export class ProfileHomeComponent implements OnInit {
             }
         ]
     }
-
-    logout() {
-        this.http.logout();
-    }
 }

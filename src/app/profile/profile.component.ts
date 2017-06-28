@@ -9,7 +9,7 @@ import { HttpService } from "../common/services/http.service";
 })
 export class ProfileComponent extends BaseAuthComponent implements OnInit {
 
-  constructor(http: HttpService) {
+  constructor(protected http: HttpService) {
     super(http);
   }
 
@@ -20,4 +20,8 @@ export class ProfileComponent extends BaseAuthComponent implements OnInit {
   scrollToTop() {
 
   }
+
+  logout() {
+        this.http.logout();
+    }
 }

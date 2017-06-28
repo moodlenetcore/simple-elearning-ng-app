@@ -7,7 +7,7 @@ import { HttpService } from './../../services/http.service'
 })
 
 export class BaseAuthComponent implements OnInit {
-    constructor(private http: HttpService) {
+    constructor(protected http: HttpService) {
     }
 
     ngOnInit() {
