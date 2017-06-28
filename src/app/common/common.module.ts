@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { BaseAuthComponent } from "./components/base-auth/base-auth.component";
 
 import { HttpService } from "./services/http.service";
+import { LoadingScreenService } from "app/common/services/loading-screen.service";
 
 @NgModule({
     imports: [
@@ -17,7 +18,8 @@ import { HttpService } from "./services/http.service";
         BaseAuthComponent
     ],
     providers: [
-        HttpService
+        HttpService,
+        LoadingScreenService
     ]
 })
 
