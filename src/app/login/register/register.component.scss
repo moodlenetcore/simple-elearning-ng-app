@@ -1,49 +1,11 @@
-.register-title{
-    font-weight: 700;
-    font-family: 'Open Sans';
-    font-size: 300%;
-    color: #575a5b;
-}
-
-.register-description {
-    font-weight: 300;
-    line-height: 1.5;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    width: 70%;
-}
+@import  '../shared/login-common.component.scss';
 
 .register-form{
-
-    .input-field {
-        margin-bottom: 1.25em;
-    }
-
-    .checkbox-field {
-        display: block;
-        max-width: 100%;
-        margin-bottom: 5px;
-
-        .checkbox-label{
-            font-weight: 400;
-            font-size: 14px;
-        }
-    }
-
-    .input-value {
-        border-radius: 3px;
-        border: 1px solid #aebdc1;
-        padding: 0.625em;
-        width: 70%;       
-
-        &.error{
-            border-color: #b24626;
-        }
-    }
-
-    .input-label{
-        font-weight: 600;
-    }
+    color: #FFF;
+    font-family: 'Quicksand', sans-serif;
+    max-height: 500px;
+    overflow: auto;
+    padding: 0 10% 15px;
 
     .input-error{
         color: #b24626;
@@ -51,43 +13,5 @@
         font-weight: 300;
         margin: 0;        
     }
-
-    .register-button {
-        display: inline-block;
-        text-align: center;
-        white-space: nowrap;
-        background-color: #21abc7;
-        border: 1px solid #21abc7;
-        color: #ffffff;
-        border-radius: 50px;
-        font-weight: 600;
-        transition: 0.2s;
-        width: 70%;
-        height: 50px;
-    }
-
-    .term-of-use {        
-        width: 70%;
-        margin: 2.5em 0em;
-
-        .term-block {            
-            padding: 1.25em;
-            border: 1px solid #e2e8e9;
-            border-radius: 8px;
-
-            &.error{
-                border-color: #b24626;
-            }
-        }
-    }
 }
 
-.general-errors{
-    width: 70%;
-    padding: 15px;
-    margin-bottom: 20px;
-    border: 1px solid transparent;
-    border-radius: 4px;    color: #a94442;
-    background-color: #f2dede;
-    border-color: #ebccd1;
-}

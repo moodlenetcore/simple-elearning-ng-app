@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseAuthComponent } from "../common/components/base-auth/base-auth.component";
 import { HttpService } from "../common/services/http.service";
-import { LoadingScreenService } from "app/common/services/loading-screen.service";
 
 @Component({
   selector: 'app-profile',
@@ -10,20 +9,15 @@ import { LoadingScreenService } from "app/common/services/loading-screen.service
 })
 export class ProfileComponent extends BaseAuthComponent implements OnInit {
 
-  constructor(protected http: HttpService, protected loadingScreenService: LoadingScreenService) {
-    super(http, loadingScreenService);
+  constructor(http: HttpService) {
+    super(http);
   }
 
   ngOnInit() {
     super.ngOnInit();
-    this.loadingScreenService.hide();
   }
 
   scrollToTop() {
 
-  }
-
-  logout() {
-    this.http.logout();
   }
 }

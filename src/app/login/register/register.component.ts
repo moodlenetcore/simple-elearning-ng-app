@@ -17,6 +17,22 @@ export class RegisterComponent implements OnInit {
     agreeTermOfUse: boolean;
     registerModel = <RegisterModel>{};
     generalErrors: any = null;
+    formErrors = {
+        'email': '',
+        'password': ''
+    };
+
+    private validationMessages = {
+        'email': {
+            'required': 'This field is required',
+            'invalidEmail': 'Email is invalid'
+        },
+        'password': {
+            'required': 'This field is required',
+            'minlength': 'Password is too short (minimum is 6 characters)',
+            'maxlength': 'Password is too long (maximum is 128 characters)',
+        }
+    };
 
     get passwordInputType(): string {
         return this.showPassword ? 'text' : 'password';
@@ -32,18 +48,37 @@ export class RegisterComponent implements OnInit {
         this.buildForm();
     }
 
-    buildForm(): void {
+    onSubmit() {
+        if (this.registerForm.status === FormStatus.valid && this.registerForm.dirty) {
+            this.registerModel = this.registerForm.value;
+            this.loginService.register(<RegisterModel>{
+                email: this.registerForm.value.email,
+                password: this.registerForm.value.password,
+                confirmPassword: this.registerForm.value.password
+            }).subscribe((res) => {
+                this.http.navigateTo(['/profile/home']);
+            }, (err) => {
+                this.populateGeneralErrors(err);
+            });
+        }
+        this.validate();
+    }
+
+    goToLogin() {
+        this.router.navigate(['/login/sign_in']);
+    }    
+
+    private buildForm(): void {
         this.registerForm = this.fb.group({
             'email': [this.registerModel.email, [Validators.required]],
-            'password': [this.registerModel.password, [Validators.required, Validators.minLength(6), Validators.maxLength(128)]],
-            'agreeTermOfUse': [this.agreeTermOfUse, [Validators.required]]
+            'password': [this.registerModel.password, [Validators.required, Validators.minLength(6), Validators.maxLength(128)]]
         });
         this.registerForm.valueChanges
             .subscribe(data => this.onValueChanged(data));
         this.onValueChanged(); // (re)set validation messages now
     }
 
-    onValueChanged(data?: any) {
+    private onValueChanged(data?: any) {
         if (!this.registerForm) { return; }
         this.generalErrors = null;
         const form = this.registerForm;
@@ -60,38 +95,8 @@ export class RegisterComponent implements OnInit {
         }
     }
 
-    onSubmit() {
-        if (this.registerForm.status === FormStatus.valid && this.registerForm.dirty) {
-            this.registerModel = this.registerForm.value;
-            this.loginService.register(<RegisterModel>{
-                email: this.registerForm.value.email,
-                password: this.registerForm.value.password,
-                confirmPassword: this.registerForm.value.password
-            }).subscribe((res) => {
-                this.http.navigateTo(['/profile/home']);
-            }, (err) => {
-                this.generalErrors = this.getParseServerErrorsToArray(err.json());
-            });
-        }
-        this.validate();
-    }
-
-    getParseServerErrorsToArray(serverErrors) {
-        let props = Object.getOwnPropertyNames(serverErrors);
-        if (props.length == 0) { return [serverErrors]; }
-
-        let result = [];
-        for (var index = 0; index < props.length; index++) {
-            var prop = serverErrors[props[index]];
-            for (var subIndex = 0; subIndex < prop.length; subIndex++) {
-                let sub = prop[subIndex];
-                result.push(sub);
-            }
-        }
-        return result;
-    }
-
-    validate() {
+    private validate() {
+        if (!this.agreeTermOfUse) { return; }
         if (!this.registerForm) { return; }
         const form = this.registerForm;
         for (const field in this.formErrors) {
@@ -107,28 +112,27 @@ export class RegisterComponent implements OnInit {
         }
     }
 
-    goToLogin() {
-        this.router.navigate(['/login/sign_in']);
+    private populateGeneralErrors(errors) {
+        try {
+            errors.json();
+            this.generalErrors = this.getParseServerErrorsToArray(errors.json());
+        } catch (error) {
+            this.generalErrors = ['Invalid register attempt.'];
+        }
     }
 
-    formErrors = {
-        'email': '',
-        'password': '',
-        'agreeTermOfUse': ''
-    };
+    private getParseServerErrorsToArray(serverErrors) {
+        let props = Object.getOwnPropertyNames(serverErrors);
+        if (props.length == 0) { return [serverErrors]; }
 
-    validationMessages = {
-        'email': {
-            'required': 'This field is required',
-            'invalidEmail': 'Email is invalid'
-        },
-        'password': {
-            'required': 'This field is required',
-            'minlength': 'Password is too short (minimum is 6 characters)',
-            'maxlength': 'Password is too long (maximum is 128 characters)',
-        },
-        'agreeTermOfUse': {
-            'required': 'This field is required'
+        let result = [];
+        for (var index = 0; index < props.length; index++) {
+            var prop = serverErrors[props[index]];
+            for (var subIndex = 0; subIndex < prop.length; subIndex++) {
+                let sub = prop[subIndex];
+                result.push(sub);
+            }
         }
-    };
+        return result;
+    }
 }

@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { routing } from './app.routing';
-import { AppCommonModule } from "app/common/common.module";
 
 @NgModule({
   declarations: [
@@ -17,7 +16,6 @@ import { AppCommonModule } from "app/common/common.module";
     BrowserModule,
     FormsModule,
     HttpModule,
-    AppCommonModule,
     routing
   ],
   bootstrap: [AppComponent]

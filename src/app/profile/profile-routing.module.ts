@@ -2,8 +2,7 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from '@angular/router';
 
 import { ProfileComponent } from "./profile.component";
-import { ProfileHomeComponent } from './home/home.component';
-import { ProfileEditComponent } from './edit/edit.component';
+import { ProfileHomeComponent } from "./home/home.component";
 
 const routes: Routes = [
     {
@@ -12,7 +11,6 @@ const routes: Routes = [
         children: [
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: ProfileHomeComponent },
-            { path: 'edit', component: ProfileEditComponent },
             { path: '**', redirectTo: 'home' }
         ]
     }

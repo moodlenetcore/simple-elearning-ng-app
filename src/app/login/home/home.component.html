@@ -1,11 +1,26 @@
-<div class="sign-in">Log In</div>
-<div class="discription">Don't have a MoodleNetCore account? <a (click)="register()"><b>Create account</b></a></div>
-<div>
-    <div class="input-title">Email</div>
-    <input type="email" id="email" class="input-value" [(ngModel)]="model.email" />
-    <div class="input-title">Password</div>
-    <input type="password" id="password" class="input-value" [(ngModel)]="model.password" />
+<h2 class="heading">Login</h2>
+<div class="login-form">
+    <div *ngIf="generalErrors" class="general-errors">
+        <div *ngFor="let err of generalErrors">{{err}}</div>
+    </div>
+    <div class="input-field">
+        <input type="email" id="email" class="input-box" placeholder="EMAIL" [(ngModel)]="model.email" />
+    </div>
+    <div class="input-field">
+        <input type="password" id="password" class="input-box" placeholder="PASSWORD" [(ngModel)]="model.password" />
+    </div>
+    <div class="flex-space-between">
+        <label class="checkbox-field">
+            <input type="checkbox" [(ngModel)]="rememberMe"/>
+            <span class="checkbox-input" [class.checked]="rememberMe"></span>
+            <span class="checkbox-text">Remember me</span>
+        </label>
+        <a (click)="forgotPassword()">Forgot password?</a>
+    </div>
+    <button class="submit-button" (click)="login()">Log in</button>
+    <div>
+        <span class="plain-text">To register new account</span>
+        <span class="plain-text">→</span>
+        <a class="navigate-button" (click)="register()">Click Here</a>
+    </div>
 </div>
-
-<div class="forget-password"><a (click)="forgotPassword()"><b>Forgot password?</b></a></div>
-<button class="sign-in-button" (click)="login()">Log in</button>
