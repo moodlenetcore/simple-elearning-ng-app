@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 import { RegisterModel, FormStatus } from "./../core/login.interface";
 import { LoginService } from "app/login/core/login.service";
 import { HttpService } from "app/common/services/http.service";
+import { LoadingScreenService } from "app/common/services/loading-screen.service";
 
 @Component({
     selector: 'register',
@@ -42,13 +43,15 @@ export class RegisterComponent implements OnInit {
         private fb: FormBuilder,
         private router: Router,
         private http: HttpService,
-        private loginService: LoginService) { }
+        private loginService: LoginService,
+        private loadingScreenService: LoadingScreenService) { }
 
     ngOnInit(): void {
         this.buildForm();
     }
 
     onSubmit() {
+        this.loadingScreenService.show();
         if (this.registerForm.status === FormStatus.valid && this.registerForm.dirty) {
             this.registerModel = this.registerForm.value;
             this.loginService.register(<RegisterModel>{
@@ -59,6 +62,7 @@ export class RegisterComponent implements OnInit {
                 this.http.navigateTo(['/profile/home']);
             }, (err) => {
                 this.populateGeneralErrors(err);
+                this.loadingScreenService.hide();
             });
         }
         this.validate();
